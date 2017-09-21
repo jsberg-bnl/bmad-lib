@@ -1,0 +1,63 @@
+  interface
+     function ele_pointer(loc_str,lat) result(ele_ptr)
+       use bmad
+       character(*), intent(in) :: loc_str
+       type(lat_struct), target, intent(in) :: lat
+       type(ele_struct), pointer :: ele_ptr
+     end function ele_pointer
+     function ele_index(loc_str,lat) result(ix_ele)
+       use bmad
+       character(*), intent(in) :: loc_str
+       type(lat_struct), target, intent(in) :: lat
+       integer :: ix_ele
+     end function ele_index
+     subroutine findco4(period,co,m,failure)
+       use bmad
+       implicit none
+       type(lat_struct), intent(inout) :: period
+       type(coord_struct), allocatable, dimension(:), intent(inout) :: co
+       real(rp), dimension(6,6), intent(out) :: m
+       logical, intent(out), optional :: failure
+     end subroutine findco4
+     subroutine findco2(period,co,m,failure)
+       use bmad
+       implicit none
+       type(lat_struct), intent(inout) :: period
+       type(coord_struct), allocatable, dimension(:), intent(inout) :: co
+       real(rp), dimension(6,6), intent(out) :: m
+       logical, intent(out), optional :: failure
+     end subroutine findco2
+  end interface
+  interface sublat
+     subroutine sublat_loc(loc_str0,loc_str1,lat_in,lat_out)
+       use bmad
+       implicit none
+       character(*), intent(in) :: loc_str0,loc_str1
+       type(lat_struct), target, intent(in) :: lat_in
+       type(lat_struct), target, intent(inout) :: lat_out
+     end subroutine sublat_loc
+     subroutine sublat_ix(ix0,ix1,lat_in,lat_out)
+       use bmad
+       implicit none
+       integer, intent(in) :: ix0,ix1
+       type(lat_struct), target, intent(in) :: lat_in
+       type(lat_struct), target, intent(inout) :: lat_out
+     end subroutine sublat_ix
+  end interface sublat
+  interface set_attribute
+     subroutine set_attribute_real(ele,attrib_name,val,do_flag)
+       use bmad
+       type(ele_struct), target, intent(inout) :: ele
+       character(*), intent(in) :: attrib_name
+       real(rp), intent(in) :: val
+       logical, intent(in), optional :: do_flag
+     end subroutine set_attribute_real
+  end interface set_attribute
+  interface
+     function get_attribute_real(ele,attrib_name) result(val)
+       use bmad
+       type(ele_struct), target, intent(in) :: ele
+       character(*), intent(in) :: attrib_name
+       real(rp) :: val
+     end function get_attribute_real
+  end interface
