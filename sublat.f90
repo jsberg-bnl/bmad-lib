@@ -31,6 +31,13 @@ subroutine sublat_ix(ix0,ix1,lat_in,lat_out)
      e0%value(e_tot_start$) = e1%value(e_tot_start$)
      call set_flags_for_changed_attribute(e0)
   end if
+  do i=1,lat_out%n_ele_max
+     e0 => lat_out%ele(i)
+     if (e0%key.eq.patch$.and.e0%value(flexible$).eq.true$) then
+        e0%value(flexible$)=false$
+        call set_flags_for_changed_attribute(e0,e0%value(flexible$))
+     end if
+  end do
   do i=lat_out%n_ele_track+1,lat_out%n_ele_max
      e0 => lat_out%ele(i)
      if (e0%lord_status.eq.multipass_lord$.and.e0%key.eq.sbend$) then
