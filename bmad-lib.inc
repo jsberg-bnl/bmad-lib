@@ -45,19 +45,32 @@
      end subroutine sublat_ix
   end interface sublat
   interface set_attribute
-     subroutine set_attribute_real(ele,attrib_name,val,do_flag)
+     subroutine set_attribute_real_ele(ele,attrib_name,val,do_flag)
        use bmad
        type(ele_struct), target, intent(inout) :: ele
        character(*), intent(in) :: attrib_name
        real(rp), intent(in) :: val
        logical, intent(in), optional :: do_flag
-     end subroutine set_attribute_real
+     end subroutine set_attribute_real_ele
+     subroutine set_attribute_real_loc(loc_str,lat,attrib_name,val,do_flag)
+       use bmad
+       type(lat_struct), target, intent(inout) :: lat
+       character(*), intent(in) :: loc_str,attrib_name
+       real(rp), intent(in) :: val
+       logical, intent(in), optional :: do_flag
+     end subroutine set_attribute_real_loc
   end interface set_attribute
-  interface
-     function get_attribute_real(ele,attrib_name) result(val)
+  interface get_attribute_real
+     function get_attribute_real_ele(ele,attrib_name) result(val)
        use bmad
        type(ele_struct), target, intent(in) :: ele
        character(*), intent(in) :: attrib_name
        real(rp) :: val
-     end function get_attribute_real
+     end function get_attribute_real_ele
+     function get_attribute_real_loc(loc_str,lat,attrib_name) result(val)
+       use bmad
+       character(*), intent(in) :: loc_str,attrib_name
+       type(lat_struct), target, intent(in) :: lat
+       real(rp) :: val
+     end function get_attribute_real_loc
   end interface
