@@ -25,8 +25,11 @@ subroutine sublat_ix(ix0,ix1,lat_in,lat_out)
      e0%floor = e1%floor
      e0%map_ref_orb_in = e1%map_ref_orb_in
      e0%time_ref_orb_in = e1%time_ref_orb_in
-     e0%s_start = 0.0_rp
-     e0%ref_time = 0.0_rp
+     e0%s_start = e1%s_start
+     e0%s = e1%s_start
+     e0%ref_time = e1%value(ref_time_start$)
+     e0%value(ref_time_start$) = e1%value(ref_time_start$)
+     e0%value(delta_ref_time$) = 0.0_rp
      e0%value(p0c_start$) = e1%value(p0c_start$)
      e0%value(e_tot_start$) = e1%value(e_tot_start$)
      call set_flags_for_changed_attribute(e0)
