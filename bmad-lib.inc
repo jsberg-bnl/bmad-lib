@@ -59,6 +59,20 @@
        real(rp), intent(in) :: val
        logical, intent(in), optional :: do_flag
      end subroutine set_attribute_real_loc
+     subroutine set_attribute_logical_ele(ele,attrib_name,val,do_flag)
+       use bmad
+       type(ele_struct), target, intent(inout) :: ele
+       character(*), intent(in) :: attrib_name
+       logical, intent(in) :: val
+       logical, intent(in), optional :: do_flag
+     end subroutine set_attribute_logical_ele
+     subroutine set_attribute_logical_loc(loc_str,lat,attrib_name,val,do_flag)
+       use bmad
+       type(lat_struct), target, intent(inout) :: lat
+       character(*), intent(in) :: loc_str,attrib_name
+       logical, intent(in) :: val
+       logical, intent(in), optional :: do_flag
+     end subroutine set_attribute_logical_loc
   end interface set_attribute
   interface get_attribute_real
      function get_attribute_real_ele(ele,attrib_name) result(val)
