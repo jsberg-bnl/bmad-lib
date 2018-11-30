@@ -1,6 +1,5 @@
 subroutine sublat_ix(ix0,ix1,lat_in,lat_out)
   use bmad
-  use lat_ele_loc_mod
   implicit none
   integer, intent(in) :: ix0,ix1
   type(lat_struct), target, intent(in) :: lat_in
