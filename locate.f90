@@ -14,7 +14,7 @@ function ele_index(loc_str,lat) result(ix_ele)
         return
      end if
   end do
-  stop 'ele_index: loc_str not found'
+  ix_ele = -1
 end function ele_index
 
 function ele_pointer(loc_str,lat) result(ele_ptr)
@@ -23,6 +23,7 @@ function ele_pointer(loc_str,lat) result(ele_ptr)
   character(*), intent(in) :: loc_str
   type(lat_struct), target, intent(in) :: lat
   type(ele_struct), pointer :: ele_ptr
+  integer ix
   interface
      function ele_index(loc_str,lat) result(ix_ele)
        use bmad
@@ -32,5 +33,10 @@ function ele_pointer(loc_str,lat) result(ele_ptr)
      end function ele_index
   end interface
 
-  ele_ptr => lat%ele(ele_index(loc_str,lat))
+  ix = ele_index(loc_str,lat)
+  if (ix.eq.-1) then
+     nullify(ele_ptr)
+  else
+     ele_ptr => lat%ele(ix)
+  end if
 end function ele_pointer
