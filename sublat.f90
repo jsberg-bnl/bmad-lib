@@ -10,6 +10,9 @@ subroutine sublat_ix(ix0,ix1,lat_in,lat_out)
   lat_out = lat_in
   if (ix0.gt.0) lat_out%ele(1:ix0-1)%key = -1
   lat_out%ele(ix1+1:lat_in%n_ele_track)%key = -1
+  do i=1,ubound(lat_out%branch,1)
+     lat_out%branch(i)%ele(1:lat_out%branch(i)%n_ele_track)%key = -1
+  end do
   call remove_eles_from_lat(lat_out)
   if (ix0.gt.0) then
      e0 => lat_out%ele(0)
