@@ -27,6 +27,13 @@
        real(rp), dimension(6,6), intent(out) :: m
        logical, intent(out), optional :: failure
      end subroutine findco2
+     subroutine write_attribute_real(u,ele,attrib_name)
+       use bmad
+       implicit none
+       integer, intent(in) :: u
+       type(ele_struct), intent(in) :: ele
+       character(*), intent(in) :: attrib_name
+     end subroutine write_attribute_real
   end interface
   interface sublat
      subroutine sublat_loc(loc_str0,loc_str1,lat_in,lat_out)

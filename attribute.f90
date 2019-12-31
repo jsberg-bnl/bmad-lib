@@ -128,3 +128,22 @@ function get_attribute_real_loc(loc_str,lat,attrib_name) result(val)
   end interface
   val = get_attribute_real_ele(ele_pointer(loc_str,lat),attrib_name)
 end function get_attribute_real_loc
+
+subroutine write_attribute_real(u,ele,attrib_name)
+  use bmad
+  implicit none
+  interface
+     function get_attribute_real_ele(ele,attrib_name) result(val)
+       use bmad
+       type(ele_struct), target, intent(in) :: ele
+       character(*), intent(in) :: attrib_name
+       real(rp) :: val
+     end function get_attribute_real_ele
+  end interface
+  integer, intent(in) :: u
+  type(ele_struct), intent(in) :: ele
+  character(*), intent(in) :: attrib_name
+
+  write(u,'(a,''['',a,''] = '',sp,es25.17e3)') upcase(trim(ele%name)),upcase(trim(attrib_name)),&
+       get_attribute_real_ele(ele,attrib_name)
+end subroutine write_attribute_real
