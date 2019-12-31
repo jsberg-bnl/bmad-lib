@@ -46,8 +46,8 @@ subroutine sublat_ix(ix0,ix1,lat_in,lat_out)
   do i=lat_out%n_ele_track+1,lat_out%n_ele_max
      e0 => lat_out%ele(i)
      if (e0%lord_status.eq.multipass_lord$.and.e0%key.eq.sbend$) then
-        e0%value(n_ref_pass$) = 0
-        call set_flags_for_changed_attribute(e0,e0%value(n_ref_pass$))
+        e0%value(multipass_ref_energy$) = user_set$
+        call set_flags_for_changed_attribute(e0,e0%value(multipass_ref_energy$))
      end if
   end do
   call lattice_bookkeeper(lat_out)
