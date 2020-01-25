@@ -40,6 +40,12 @@
        integer, intent(in) :: i
        type(lat_struct), target, intent(inout) :: lat
      end subroutine bmad_parse_from_argument
+     subroutine bmad_parse2_from_argument(i,lat)
+       use bmad
+       implicit none
+       integer, intent(in) :: i
+       type(lat_struct), target, intent(inout) :: lat
+     end subroutine bmad_parse2_from_argument
   end interface
   interface sublat
      subroutine sublat_loc(loc_str0,loc_str1,lat_in,lat_out)
