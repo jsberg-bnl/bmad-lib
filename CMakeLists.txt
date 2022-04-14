@@ -1,6 +1,6 @@
+cmake_minimum_required(VERSION $ENV{ACC_CMAKE_VERSION})
 project(bmad-lib)
 set(LIBNAME bmad-lib)
-cmake_minimum_required(VERSION $ENV{ACC_CMAKE_VERSION})
 set (INC_DIRS .)
 set (SRC_DIRS .)
 include($ENV{ACC_BUILD_SYSTEM}/Master.cmake)
