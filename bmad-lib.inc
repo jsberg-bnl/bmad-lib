@@ -71,6 +71,13 @@
        real(rp), intent(in) :: val
        logical, intent(in), optional :: do_flag
      end subroutine set_attribute_real_ele
+     subroutine set_attribute_value_ele(ele,value_index,val,do_flag)
+       use bmad
+       type(ele_struct), target, intent(inout) :: ele
+       integer, intent(in) :: value_index
+       real(rp), intent(in) :: val
+       logical, intent(in), optional :: do_flag
+     end subroutine set_attribute_value_ele
      subroutine set_attribute_real_loc(loc_str,lat,attrib_name,val,do_flag)
        use bmad
        type(lat_struct), target, intent(inout) :: lat

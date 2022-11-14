@@ -18,6 +18,25 @@ subroutine set_attribute_real_ele(ele,attrib_name,val,do_flag)
   if (do_flag_loc) call set_flags_for_changed_attribute(ele,a_ptr%r)
 end subroutine set_attribute_real_ele
 
+subroutine set_attribute_value_ele(ele,value_index,val,do_flag)
+  use bmad
+  implicit none
+  type(ele_struct), target, intent(inout) :: ele
+  integer, intent(in) :: value_index
+  real(rp), intent(in) :: val
+  logical, intent(in), optional :: do_flag
+  logical :: err_flag,do_flag_loc
+  type(all_pointer_struct) :: a_ptr
+
+  ele%value(value_index) = val
+  if (present(do_flag)) then
+     do_flag_loc = do_flag
+  else
+     do_flag_loc = .true.
+  end if
+  if (do_flag_loc) call set_flags_for_changed_attribute(ele,ele%value(value_index))
+end subroutine set_attribute_value_ele
+
 subroutine set_attribute_logical_ele(ele,attrib_name,val,do_flag)
   use bmad
   implicit none
