@@ -113,4 +113,10 @@
        type(lat_struct), target, intent(in) :: lat
        real(rp) :: val
      end function get_attribute_real_loc
+     function bmad_const(lat,name) result(v)
+       use bmad
+       type(lat_struct), target, intent(in) :: lat
+       character(*), intent(in) :: name
+       real(rp) :: v
+     end function bmad_const
   end interface
