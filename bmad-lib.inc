@@ -46,6 +46,12 @@
        integer, intent(in) :: i
        type(lat_struct), target, intent(inout) :: lat
      end subroutine bmad_parse2_from_argument
+     function bmad_const(lat,name) result(v)
+       use bmad
+       type(lat_struct), target, intent(in) :: lat
+       character(*), intent(in) :: name
+       real(rp) :: v
+     end function bmad_const
   end interface
   interface sublat
      subroutine sublat_loc(loc_str0,loc_str1,lat_in,lat_out)
@@ -113,10 +119,4 @@
        type(lat_struct), target, intent(in) :: lat
        real(rp) :: val
      end function get_attribute_real_loc
-     function bmad_const(lat,name) result(v)
-       use bmad
-       type(lat_struct), target, intent(in) :: lat
-       character(*), intent(in) :: name
-       real(rp) :: v
-     end function bmad_const
   end interface
