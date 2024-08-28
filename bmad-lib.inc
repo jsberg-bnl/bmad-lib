@@ -23,10 +23,18 @@
        use bmad
        implicit none
        type(lat_struct), intent(inout) :: period
-       type(coord_struct), allocatable, dimension(:), intent(inout) :: co
+       type(coord_struct), intent(inout) :: co
        real(rp), dimension(6,6), intent(out) :: m
        logical, intent(out), optional :: failure
      end subroutine findco2
+     subroutine findco2_old(period,co,m,failure)
+       use bmad
+       implicit none
+       type(lat_struct), intent(inout) :: period
+       type(coord_struct), allocatable, dimension(:), intent(inout) :: co
+       real(rp), dimension(6,6), intent(out) :: m
+       logical, intent(out), optional :: failure
+     end subroutine findco2_old
      subroutine write_attribute_real(u,ele,attrib_name)
        use bmad
        implicit none
