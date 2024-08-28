@@ -65,13 +65,10 @@ subroutine set_attribute_real_loc(loc_str,lat,attrib_name,val,do_flag)
   real(rp), intent(in) :: val
   logical, intent(in), optional :: do_flag
   type(ele_struct), pointer :: e
+  integer :: i_loc,n_loc
+  logical :: err
+  type(ele_pointer_struct), dimension(:), allocatable :: eles
   interface
-     function ele_pointer(loc_str,lat) result(ele_ptr)
-       use bmad
-       character(*), intent(in) :: loc_str
-       type(lat_struct), target, intent(in) :: lat
-       type(ele_struct), pointer :: ele_ptr
-     end function ele_pointer
      subroutine set_attribute_real_ele(ele,attrib_name,val,do_flag)
        use bmad
        type(ele_struct), target, intent(inout) :: ele
@@ -81,8 +78,12 @@ subroutine set_attribute_real_loc(loc_str,lat,attrib_name,val,do_flag)
      end subroutine set_attribute_real_ele
   end interface
      
-  e => ele_pointer(loc_str,lat)
-  call set_attribute_real_ele(e,attrib_name,val,do_flag)
+  call lat_ele_locator(loc_str,lat,eles,n_loc,err)
+  do i_loc=1,n_loc
+     e => eles(i_loc)%ele
+     call set_attribute_real_ele(e,attrib_name,val,do_flag)
+  end do
+  if (allocated(eles)) deallocate(eles)
 end subroutine set_attribute_real_loc
 
 subroutine set_attribute_logical_loc(loc_str,lat,attrib_name,val,do_flag)
@@ -93,13 +94,10 @@ subroutine set_attribute_logical_loc(loc_str,lat,attrib_name,val,do_flag)
   logical, intent(in) :: val
   logical, intent(in), optional :: do_flag
   type(ele_struct), pointer :: e
+  integer :: i_loc,n_loc
+  logical :: err
+  type(ele_pointer_struct), dimension(:), allocatable :: eles
   interface
-     function ele_pointer(loc_str,lat) result(ele_ptr)
-       use bmad
-       character(*), intent(in) :: loc_str
-       type(lat_struct), target, intent(in) :: lat
-       type(ele_struct), pointer :: ele_ptr
-     end function ele_pointer
      subroutine set_attribute_logical_ele(ele,attrib_name,val,do_flag)
        use bmad
        type(ele_struct), target, intent(inout) :: ele
@@ -109,8 +107,12 @@ subroutine set_attribute_logical_loc(loc_str,lat,attrib_name,val,do_flag)
      end subroutine set_attribute_logical_ele
   end interface
      
-  e => ele_pointer(loc_str,lat)
-  call set_attribute_logical_ele(e,attrib_name,val,do_flag)
+  call lat_ele_locator(loc_str,lat,eles,n_loc,err)
+  do i_loc=1,n_loc
+     e => eles(i_loc)%ele
+     call set_attribute_logical_ele(e,attrib_name,val,do_flag)
+  end do
+  if (allocated(eles)) deallocate(eles)
 end subroutine set_attribute_logical_loc
 
 function get_attribute_real_ele(ele,attrib_name) result(val)
