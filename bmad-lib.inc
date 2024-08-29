@@ -11,6 +11,12 @@
        type(lat_struct), target, intent(in) :: lat
        integer :: ix_ele
      end function ele_index
+     function ele_index_array(loc_str,lat) result(ix_ele)
+       use bmad
+       character(*), intent(in) :: loc_str
+       type(lat_struct), target, intent(in) :: lat
+       integer, dimension(:), allocatable :: ix_ele
+     end function ele_index_array
      subroutine findco4(period,co,m,failure)
        use bmad
        implicit none
