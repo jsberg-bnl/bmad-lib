@@ -24,7 +24,7 @@ subroutine findco2(period,co,m,failure)
   if (present(failure)) failure = .false.
   z = co%vec
   o(1) = co
-  do ix=0,period%n_ele_track
+  do ix=1,period%n_ele_track
      call make_mat6(period%ele(ix),period%param,o(1),o(2),err_flag)
      if (err_flag) then
         if (present(failure)) failure = .true.
