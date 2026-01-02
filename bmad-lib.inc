@@ -67,22 +67,6 @@
        real(rp) :: v
      end function bmad_const
   end interface
-  interface sublat
-     subroutine sublat_loc(loc_str0,loc_str1,lat_in,lat_out)
-       use bmad
-       implicit none
-       character(*), intent(in) :: loc_str0,loc_str1
-       type(lat_struct), target, intent(in) :: lat_in
-       type(lat_struct), target, intent(inout) :: lat_out
-     end subroutine sublat_loc
-     subroutine sublat_ix(ix0,ix1,lat_in,lat_out)
-       use bmad
-       implicit none
-       integer, intent(in) :: ix0,ix1
-       type(lat_struct), target, intent(in) :: lat_in
-       type(lat_struct), target, intent(inout) :: lat_out
-     end subroutine sublat_ix
-  end interface sublat
   interface set_attribute
      subroutine set_attribute_real_ele(ele,attrib_name,val,do_flag)
        use bmad
