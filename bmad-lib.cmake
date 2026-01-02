@@ -1,4 +1,5 @@
 set(SRC_FILES
+  bmad_lib.f90
   const.f90
   findco.f90
   locate.f90
